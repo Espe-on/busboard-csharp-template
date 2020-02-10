@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusBoard
 {
@@ -6,7 +8,12 @@ namespace BusBoard
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            List<ArrivalDetails> busInfo = JsonRetriever
+                .GetJson("https://api.tfl.gov.uk/", "StopPoint/490008660N/Arrivals")
+                .OrderBy(arrivalDetails => arrivalDetails.TimeToStation)
+                .Take(5)
+                .ToList();
+            ArrivalsPrinter.Print(busInfo);
         }
     }
 }
