@@ -10,9 +10,8 @@ namespace BusBoard
         {
             Console.WriteLine("Please Enter the station ID.");
             string stationIdInput = Console.ReadLine();
-            List<ArrivalDetails> busInfo = ArrivalsJsonRetriever
-                .GetJson(stationIdInput);
-            ArrivalsPrinter.Print(busInfo);
+            List<ArrivalDetails> busStopInfo = ArrivalsJsonRetriever.GetJson(stationIdInput);
+            ArrivalsPrinter.Print(busStopInfo);
         }
     }
 }
