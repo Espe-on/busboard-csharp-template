@@ -8,11 +8,10 @@ namespace BusBoard
     {
         static void Main(string[] args)
         {
-            List<ArrivalDetails> busInfo = JsonRetriever
-                .GetJson("https://api.tfl.gov.uk/", "StopPoint/490008660N/Arrivals")
-                .OrderBy(arrivalDetails => arrivalDetails.TimeToStation)
-                .Take(5)
-                .ToList();
+            Console.WriteLine("Please Enter the station ID.");
+            string stationIdInput = Console.ReadLine();
+            List<ArrivalDetails> busInfo = ArrivalsJsonRetriever
+                .GetJson(stationIdInput);
             ArrivalsPrinter.Print(busInfo);
         }
     }
