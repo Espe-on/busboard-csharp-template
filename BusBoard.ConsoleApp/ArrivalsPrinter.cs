@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusBoard
 {
     public class ArrivalsPrinter 
     {
-        public static void Print(List<ArrivalDetails>arrivalsList)
+        public static void Print(IEnumerable<ArrivalDetails> arrivalsList)
         {
-            Console.WriteLine($"The station is {arrivalsList[0].StationName}");
+            Console.WriteLine($"The station is {arrivalsList.First().StationName}");
             foreach (var bus in arrivalsList)
             {
                 Console.WriteLine($"The {bus.LineName} " +
