@@ -32,7 +32,7 @@ namespace BusBoard
         {
             var request = new RestRequest($"StopPoint")
                 .AddQueryParameter("stopTypes", "NaptanPublicBusCoachTram")
-                .AddQueryParameter("radius", "200")
+                .AddQueryParameter("radius", "290")
                 .AddQueryParameter("lat", latitude)
                 .AddQueryParameter("lon", longitude);
              
