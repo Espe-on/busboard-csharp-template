@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text.Json.Serialization;
-
-namespace BusBoard
+﻿namespace BusBoard
 {
     public class PostcodeInitialReturn
     {

@@ -27,29 +27,19 @@ namespace BusBoard
             return response; 
         }
 
-        public static Dictionary<string, string> LonLat(string postcode)
+        public static PostcodeDetails LonLat(string postcode)
         {
-            if (PostcodeValidator(postcode) == true)
+            if (!PostcodeValidator(postcode))
             {
-                string baseUrl = "https://api.postcodes.io/";
-                string requestPath = $"postcodes/{postcode}";
-                var client = new RestClient(baseUrl);
-                var request = new RestRequest(requestPath, DataFormat.Json);
-                var rawResponse = client.Get<PostcodeInitialReturn>(request);
-                var postcodeDetails = rawResponse.Data.Result;
-                Dictionary<string, string> response = new Dictionary<string, string>();
-                response.Add("lat", postcodeDetails.Latitude);
-                response.Add("lon", postcodeDetails.Longitude);
-                // string reponse = $"{postcodeDetails.Longitude},{postcodeDetails.Latitude}";
-                return response;
+                throw new Exception("ERROR INVALID POSTCODE");
             }
-            else
-            {
-                string response = "ERROR INVALID POSTCODE";
-                //put in better errors here
-            }
-            Dictionary<string, string> response2 = new Dictionary<string, string>();
-            return response2;
+            
+            string baseUrl = "https://api.postcodes.io/";
+            string requestPath = $"postcodes/{postcode}";
+            var client = new RestClient(baseUrl);
+            var request = new RestRequest(requestPath, DataFormat.Json);
+            var rawResponse = client.Get<PostcodeInitialReturn>(request);
+            return rawResponse.Data.Result;
         }
     }
 }
