@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace BusBoard
 {
-    public class Return
+    public class PostcodeInitialReturn
     {
         public int Status { get; set; }
         public PostcodeDetails Result { get; set; }

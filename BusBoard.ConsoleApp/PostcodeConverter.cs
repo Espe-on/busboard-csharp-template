@@ -27,7 +27,7 @@ namespace BusBoard
             return response; 
         }
 
-        public static string LonLat(string postcode)
+        public static Dictionary<string, string> LonLat(string postcode)
         {
             if (PostcodeValidator(postcode) == true)
             {
@@ -35,18 +35,21 @@ namespace BusBoard
                 string requestPath = $"postcodes/{postcode}";
                 var client = new RestClient(baseUrl);
                 var request = new RestRequest(requestPath, DataFormat.Json);
-                var rawResponse = client.Get<Return>(request);
+                var rawResponse = client.Get<PostcodeInitialReturn>(request);
                 var postcodeDetails = rawResponse.Data.Result;
-                string reponse = $"{postcodeDetails.Longitude},{postcodeDetails.Latitude}";
-                return reponse;
+                Dictionary<string, string> response = new Dictionary<string, string>();
+                response.Add("lat", postcodeDetails.Latitude);
+                response.Add("lon", postcodeDetails.Longitude);
+                // string reponse = $"{postcodeDetails.Longitude},{postcodeDetails.Latitude}";
+                return response;
             }
             else
             {
                 string response = "ERROR INVALID POSTCODE";
                 //put in better errors here
             }
-
-            return ":(";
+            Dictionary<string, string> response2 = new Dictionary<string, string>();
+            return response2;
         }
     }
 }
