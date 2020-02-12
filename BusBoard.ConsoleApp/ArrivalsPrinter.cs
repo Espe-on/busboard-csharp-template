@@ -8,12 +8,17 @@ namespace BusBoard
     {
         public static void Print(IEnumerable<ArrivalDetails> arrivalsList)
         {
-            Console.WriteLine($"The station is {arrivalsList.First().StationName}");
+            Console.WriteLine($"At {arrivalsList.First().StationName}");
             foreach (var bus in arrivalsList)
             {
+                string timeUnit = "minuets";
+                if ((bus.TimeToStation / 60)! == 1)
+                {
+                    timeUnit = "minuet";
+                }
                 Console.WriteLine($"The {bus.LineName} " +
                                   $"towards {bus.DestinationName} " +
-                                  $"will arrive in {bus.TimeToStation} seconds.");
+                                  $"will arrive in {bus.TimeToStation/60} {timeUnit}.");
             }
         }
     }
