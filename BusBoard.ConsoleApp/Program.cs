@@ -8,8 +8,7 @@ namespace BusBoard
     {
         static void Main(string[] args)
         { 
-            Console.WriteLine("Please enter your Postcode");
-            Console.WriteLine();
+            Console.WriteLine("Please enter your Postcode. \n");
             string postcode = Console.ReadLine(); 
             var postcodeDetails = PostcodeConverter.LonLat(postcode);
            var tflApiClient = new TflApiClient();
