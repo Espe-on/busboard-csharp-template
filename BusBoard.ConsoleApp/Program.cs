@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusBoard
 {
@@ -13,10 +14,15 @@ namespace BusBoard
             var postcodeDetails = PostcodeConverter.LonLat(postcode);
            var tflApiClient = new TflApiClient();
            List<StationIdDetails> busStops = tflApiClient.StationIdRetrieve(postcodeDetails.Latitude, postcodeDetails.Longitude);
-           foreach (var bustop in busStops)
+           int counter = 0; 
+           foreach (var arrivals in busStops.Select(bustop => tflApiClient.FetchArrivalDetails(bustop.NaptanId)))
            {
-               var arrivals = tflApiClient.FetchArrivalDetails(bustop.NaptanId);
                ArrivalsPrinter.Print(arrivals);
+               counter++;
+               if (counter == 2)
+               {
+                   break;
+               }
            }
         }
     }
