@@ -37,6 +37,14 @@ namespace BusBoard
                 .AddQueryParameter("lon", longitude);
              
             var response = MakeGetRequest<StationIdInitialReturn>(request);
+            try
+            {
+                var tester = response.StopPoints[0];
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                throw  new Exception("TFL BAD RESPONSE TO COORDINATES/POSTCODE");
+            }
             return response.StopPoints;
         }
 
